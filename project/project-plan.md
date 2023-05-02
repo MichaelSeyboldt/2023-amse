@@ -38,8 +38,8 @@ accidents and severe aviation incidents in the USA from 1982 to 2008 and from 20
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Import and merging pipeline  Datasource1 [#1][i1]
-2. Import and merging pipeline Datasource2 [][]
+- [ ] #1  Import and merging pipeline  Datasource1 
+- [ ] #2
 3. Make src1 and 2 comparable
 4. Check for discontinuities or other problems
 5. Visualise Data on a Map
