@@ -39,12 +39,12 @@ accidents and severe aviation incidents in the USA from 1982 to 2008 and from 20
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 - [ ] [Import and merging pipeline Datasource1](https://github.com/MichaelSeyboldt/2023-amse/issues/1) 
-- [ ] https://github.com/MichaelSeyboldt/2023-amse/issues/2
-3. Make src1 and 2 comparable
-4. Check for discontinuities or other problems
-5. Visualise Data on a Map
-6. Visualise Hotspots and other interesting corelations
-7. Add CI
-8. Deploy to GH pages
+- [ ] [Import and merging pipeline Datasource2](https://github.com/MichaelSeyboldt/2023-amse/issues/2)
+- [ ] [Make src1 and 2 comparable](https://github.com/MichaelSeyboldt/2023-amse/issues/3)
+- [ ] [ Check for discontinuities or other problems](https://github.com/MichaelSeyboldt/2023-amse/issues/4)
+- [ ] [Visualise Data on a Map](https://github.com/MichaelSeyboldt/2023-amse/issues/5)
+- [ ] [Visualise Hotspots and other interesting corelations](https://github.com/MichaelSeyboldt/2023-amse/issues/6)
+- [ ] [Add CI](https://github.com/MichaelSeyboldt/2023-amse/issues/7)
+- [ ] [Deploy to GH pages](https://github.com/MichaelSeyboldt/2023-amse/issues/8)
 
 
