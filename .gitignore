@@ -1,0 +1,6 @@
+project/.venv
+data/.venv
+*.zip
+*.mdb
+*.csv
+*.sqlite
