@@ -1,6 +1,8 @@
 #import wget
 import zipfile 
 from urllib import request
+import os
+
 downloads = [("https://data.ntsb.gov/avdata/FileDirectory/DownloadFile?fileID=C%3A%5Cavdata%5Cavall.zip", "avdataPost08.zip"),
 	("https://data.ntsb.gov/avdata/FileDirectory/DownloadFile?fileID=C%3A%5Cavdata%5CPre2008.zip", "avdataPre08.zip")]
 
@@ -13,3 +15,5 @@ with zipfile.ZipFile("avdataPost08.zip", 'r') as zip_ref:
 with zipfile.ZipFile("avdataPre08.zip", 'r') as zip_ref:
     zip_ref.extractall(".")
 
+os.remove("avdataPost08.zip")
+os.remove("avdataPre08.zip")
