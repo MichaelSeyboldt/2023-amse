@@ -1,6 +1,6 @@
-.PHONY: clean
+.PHONY: clean evaluate
 
-all: de.sqlite us.sqlite
+all: de.sqlite us.sqlite evaluate
 
 %.csv:
 	python3 download1.py
