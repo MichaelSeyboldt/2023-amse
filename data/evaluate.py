@@ -3,6 +3,17 @@ import matplotlib.pyplot as plt
 
 plt.rcParams.update({'font.size': 20, 'figure.figsize': (10, 8)}) # set font and plot size to be larger
 
+### vars deffs
+
+us_ev_columns = ["ev_id", "ev_type", "ev_date", "ev_city", "ev_state", "ev_country", 
+		"ev_year", "ev_month", "latitude", "longitude", "apt_name", "ev_highest_injury",
+		"inj_f_grnd", "inj_m_grnd", "inj_s_grnd", "inj_tot_f", "inj_tot_m", "inj_tot_n",
+		"inj_tot_s", "inj_tot_t" ]
+us_ac_columns = ["ev_id", "Aircraft_Key", "damage", "acft_make", "acft_model", "acft_series",
+		"acft_category", "acft_reg_cls", "elt_manufacturer", "elt_model"]
+us_ij_columns = ["ev_id", "Aircraft_Key", "inj_person_category", "injury_level", "inj_person_count"]
+
+
 ##get datasets from databases in memory
 
 genAvDE = pd.read_sql_table("generalAviation", "sqlite:///de.sqlite")
@@ -21,6 +32,10 @@ print()
 eventsUS = pd.read_sql_table("events", "sqlite:///us.sqlite")
 aircraftUS =  pd.read_sql_table("aircraft", "sqlite:///us.sqlite")
 injuryUS =  pd.read_sql_table("injury", "sqlite:///us.sqlite")
+
+eventsUS = eventsUS[us_ev_columns]
+aircraftUS = aircraftUS[us_ac_columns]
+injuryUS = injuryUS[us_ij_columns]
 
 usOnlyEvents = eventsUS[eventsUS["ev_country"]=="USA"]
 
@@ -59,3 +74,5 @@ print(f"distributed by year \n{dataUS['ev_year'].value_counts(sort=False)}")
 aufteilungUS = dataUS['ev_year'].value_counts(sort=False)
 aufteilungUS = aufteilungUS.sort_index()
 print(f"sorted: \n{aufteilungUS}")
+
+aufteilungUS.to_sql("incidentAnalysisUS", "sqlite:///results.sqlite", if_exists="replace", index=False)
