@@ -31,3 +31,24 @@ print("US data loaded")
 print(usOnlyEvents.info())
 print()
 print(dataUS.info())
+
+#analyitics DE
+
+jSplitFullDE = dataDE['Jahr'].value_counts(sort=False)
+jSplitGADE = genAvDE['Jahr'].value_counts(sort=False)
+jSplitCADE = comAvDE['Jahr'].value_counts(sort=False)
+
+aufteilung = pd.merge(pd.merge(jSplitFullDE, jSplitGADE, how="left", on="Jahr"), jSplitCADE, how="left",on="Jahr")
+
+print()
+print(f"we have data for {dataDE['Jahr'].nunique()} years")
+print(f"with {dataDE['Aktenzeichen'].nunique()} incidents")
+print(f"distributed by year {dataDE['Jahr'].value_counts(sort=False)}")
+print("split by com and general aviation")
+print(aufteilung)
+
+aufteilung = aufteilung.rename({"count_x": "Sum", "count_y": "GeneralAviation","count": "CommericalAviation"}, axis=1)
+print(f"and renamed \n{aufteilung}")
+
+
+aufteilung.to_sql("incidentAnalysisDE","sqlite:///results.sqlite", if_exists="replace", index=False) 
