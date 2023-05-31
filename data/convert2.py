@@ -9,5 +9,3 @@ for tableName in tableNames:
     dataFrame2 = pd.DataFrame(io.read("Pre2008.mdb", table=tableName))
     dataFrame2.to_sql(tableName, 'sqlite:///us.sqlite', if_exists='append', index=False)
 
-
-
