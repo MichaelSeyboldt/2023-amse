@@ -49,6 +49,13 @@ print(aufteilung)
 
 aufteilung = aufteilung.rename({"count_x": "Sum", "count_y": "GeneralAviation","count": "CommericalAviation"}, axis=1)
 print(f"and renamed \n{aufteilung}")
-
-
 aufteilung.to_sql("incidentAnalysisDE","sqlite:///results.sqlite", if_exists="replace", index=False) 
+
+
+#analytics US
+print(f"we have data for {dataUS['ev_year'].nunique()} years")
+print(f"with {dataUS['ev_id'].nunique()} incidents")
+print(f"distributed by year \n{dataUS['ev_year'].value_counts(sort=False)}")
+aufteilungUS = dataUS['ev_year'].value_counts(sort=False)
+aufteilungUS = aufteilungUS.sort_index()
+print(f"sorted: \n{aufteilungUS}")
