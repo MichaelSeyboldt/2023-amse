@@ -1,6 +1,6 @@
-.PHONY: clean
+.PHONY: clean evaluate
 
-all: de.sqlite us.sqlite
+all: de.sqlite us.sqlite evaluate
 
 %.csv:
 	python3 download1.py
@@ -13,6 +13,9 @@ de.sqlite: ca_a1.csv  ca_a2.csv  ga_b1.csv  ga_b2.csv
 
 us.sqlite: avall.mdb Pre2008.mdb
 	python3 convert2.py
+
+evaluate: de.sqlite us.sqlite
+	python3 evaluate.py
 
 clean:
 	rm -f *.csv *.mdb *.sqlite *.zip
