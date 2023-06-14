@@ -19,6 +19,7 @@ jobs:
         run: pip install -r data/requirements.txt
     
       - name: test pipeline
-	with:
-          path: project
+        working-directory: ./project
         run: ./test.sh
+        shell: bash
+
