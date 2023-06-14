@@ -1,6 +1,8 @@
 #!/bin/bash
 cd ../data
-source .venv/bin/activate
+if [ -f .venv/bin/activate ]; then
+source .venv/bin/activate;
+fi
 
 make clean
 ret=$?
@@ -20,4 +22,6 @@ if [ $ret -ne 0 ]; then
     echo "tests failed"
     exit $ret
 fi
-deactivate 
+if [ -f .venv/bin/activate ]; then
+deactivate;
+fi
