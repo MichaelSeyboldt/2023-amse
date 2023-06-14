@@ -20,6 +20,8 @@ jobs:
     
       - name: test pipeline
         working-directory: ./project
-        run: ./test.sh
+        run: |
+          ls -la
+          ./tests.sh
         shell: bash
 
