@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: install mdb tools
+        run: apt install -y mdbtools unixodbc-dev
+
       - name: setup python
         uses: actions/setup-python@v4
         with:
