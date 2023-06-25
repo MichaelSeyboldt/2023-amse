@@ -10,7 +10,7 @@ data_types = {"date": str, "CIN": str, "name": str, "petrol": int, "diesel": int
 c_gt_zero = ["petrol", "diesel", "gas", "electro", "hybrid", "plugInHybrid", "others"]
 
 # extract
-data = pd.read_csv(src, sep=";", encoding="latin_1", skiprows=7, skipfooter=2,
+data = pd.read_csv(src, sep=";", encoding="latin_1", skiprows=7, skipfooter=4,
                    header=None, usecols=columns, engine="python", dtype=str,
                    na_values=["-", "nan", "NaN"], keep_default_na=True)
 
