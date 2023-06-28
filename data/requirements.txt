@@ -5,11 +5,12 @@ charset-normalizer==3.1.0
 contourpy==1.0.7
 cycler==0.11.0
 dbfread==2.0.4
-fonttools==4.39.4
+fonttools==4.40.0
+geographiclib==2.0
+geopy==2.3.0
 greenlet==2.0.2
 idna==3.4
 ijson==2.6.1
-importlib-resources==5.12.0
 kiwisolver==1.4.4
 matplotlib==3.7.1
 meza==0.46.0
@@ -27,9 +28,8 @@ requests==2.30.0
 six==1.16.0
 soupsieve==2.4.1
 SQLAlchemy==2.0.13
-typing-extensions==4.5.0
+typing_extensions==4.5.0
 tzdata==2023.3
 Unidecode==1.3.6
 urllib3==2.0.2
 xlrd==1.2.0
-zipp==3.15.0
