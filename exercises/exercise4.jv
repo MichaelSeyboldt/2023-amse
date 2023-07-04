@@ -98,7 +98,7 @@ pipeline temperatures {
     }
 
     block TSqliteLoader oftype SQLiteLoader {
-        file: "temperatures.sqlite ";
+        file: "temperatures.sqlite";
         table: "temperatures";
     }
 
