@@ -1,0 +1,117 @@
+constraint GeoCoordConstraint oftype RangeConstraint {
+	lowerBound: -90;
+	upperBound: 90;
+}
+
+constraint PositiveConstraint oftype RangeConstraint {
+    lowerBound: 0;
+}
+
+constraint DETruthConstraint oftype AllowlistConstraint {
+    allowlist: ["Ja", "ja", "JA", "Nein", "nein", "NEIN",] ;//"doch", "OH"
+}
+
+constraint DozenConstraint oftype RangeConstraint {
+    lowerBound: 1;
+    lowerBoundInclusive: true;
+    upperBound: 12;
+    upperBoundInclusive: true;
+}
+
+valuetype geocord oftype decimal {
+    constraints: [GeoCoordConstraint,];
+}
+
+valuetype uint oftype integer {
+    constraints: [PositiveConstraint,];
+}
+
+valuetype detruth oftype text {
+    constraints: [DETruthConstraint,];
+}
+
+valuetype dozen oftype integer {
+    constraints: [DozenConstraint,];
+}
+
+transform CelsiusToFarenheit {
+    from tempC oftype decimal;
+    to tempF oftype decimal;
+
+    tempF: (tempC * 9/5) + 32;
+} 
+
+
+pipeline temperatures {
+
+    
+    block ZipDowloader oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    block ZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block TDataFilePicker oftype FilePicker{
+        path: "/data.csv";
+    }
+
+    block TFInterpteter oftype TextFileInterpreter {}
+
+    block TCSVInterpreter oftype CSVInterpreter { delimiter: ";"; }
+
+    block HeaderRenamer1 oftype CellWriter{
+        at: cell E1;
+        write: ["Temperatur"];
+    }
+    
+    block HeaderRenamer2 oftype CellWriter{
+        at: cell J1;
+        write: ["Batterietemperatur"];
+    }
+
+    block TTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Geraet" oftype uint, 
+            "Hersteller" oftype text, 
+            "Model" oftype text, 
+            "Monat" oftype dozen, 
+            "Temperatur" oftype decimal, 
+            "Batterietemperatur" oftype decimal, 
+            "Geraet aktiv" oftype detruth, 
+
+        ];
+    }
+
+    block TempConverter oftype TableTransformer{
+        inputColumn: "Temperatur";
+        outputColumn:"Temperatur";
+        use: CelsiusToFarenheit;
+    }   
+
+    block BatTempConverter oftype TableTransformer {
+        inputColumn: "Batterietemperatur";
+        outputColumn:"Batterietemperatur";
+        use: CelsiusToFarenheit;
+    }
+
+    block TSqliteLoader oftype SQLiteLoader {
+        file: "temperatures.sqlite ";
+        table: "temperatures";
+    }
+
+    ZipDowloader 
+        -> ZipArchiveInterpreter
+        -> TDataFilePicker
+        -> TFInterpteter
+        -> TCSVInterpreter
+        -> HeaderRenamer1
+        -> HeaderRenamer2
+        -> TTableInterpreter
+        -> TempConverter
+        -> BatTempConverter
+        -> TSqliteLoader;
+
+}
